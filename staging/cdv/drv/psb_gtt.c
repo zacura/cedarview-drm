@@ -383,12 +383,8 @@ int psb_gtt_mm_init(struct psb_gtt *pg)
 	mm = &gtt_mm->base;
 
 	/*will use tt_start ~ 128M for IMG TT buffers*/
-	ret = drm_mm_init(mm, tt_start, ((tt_size * 3)/4 - tt_start));
-	if (ret) {
-		DRM_DEBUG("drm_mm_int error(%d)\n", ret);
-		goto err_mm_init;
-	}
-
+	drm_mm_init(mm, tt_start, ((tt_size * 3)/4 - tt_start));
+	
 	gtt_mm->count = 0;
 
 	dev_priv->gtt_mm = gtt_mm;
@@ -397,8 +393,6 @@ int psb_gtt_mm_init(struct psb_gtt *pg)
 		(unsigned long)tt_start,
 		(unsigned long)((tt_size / 2) - tt_start));
 	return 0;
-err_mm_init:
-	drm_ht_remove(ht);
 
 err_free:
 	kfree(gtt_mm);
