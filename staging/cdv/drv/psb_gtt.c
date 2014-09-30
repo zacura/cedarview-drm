@@ -704,8 +704,8 @@ static int psb_gtt_add_node(struct psb_gtt_mm *mm,
 			    struct drm_mm_node *node,
 			    struct psb_gtt_mem_mapping **entry)
 {
-	struct psb_gtt_hash_entry *hentry;
-	struct psb_gtt_mem_mapping *mapping;
+	struct psb_gtt_hash_entry *hentry = NULL;
+	struct psb_gtt_mem_mapping *mapping = NULL;
 	int ret;
 
 	ret = psb_gtt_mm_alloc_insert_ht(mm, tgid, &hentry);
